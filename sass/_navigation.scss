@@ -1,0 +1,33 @@
+.navigation {
+  &__ul {
+    display: flex;
+    list-style-type: none;
+    align-items: center;
+  }
+
+  &__li {
+    &:not(:last-of-type) {
+      margin-right: 1rem;
+    }
+
+    border-bottom: 2px solid transparent;
+    transition: .2s all;
+    &:hover {
+      border-bottom: 2px solid #ecf0f1;
+    }
+
+    &--sign {
+      background: #2ecc71;
+      padding: 0.5rem;
+      border-radius: 8px;
+      border: none;
+    }
+  }
+
+  &__link {
+    //color: #34495e;
+    color: #ecf0f1;
+    text-decoration: none;
+    font-size: 1.5rem;
+  }
+}

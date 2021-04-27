@@ -1,0 +1,108 @@
+*,
+*::before,
+*::after {
+  padding: 0;
+  margin: 0;
+  box-sizing: inherit; }
+
+body {
+  box-sizing: border-box;
+  font-size: 62.5%;
+  background-color: #dfe6e9; }
+
+html {
+  font-family: "Raleway", sans-serif; }
+
+.container {
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+  margin-top: 7.3rem;
+  min-height: 80vh; }
+
+.countries {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center; }
+
+.country {
+  width: 25rem;
+  background-color: #fff;
+  box-shadow: 0 2rem 5rem 1rem rgba(0, 0, 0, 0.1);
+  border-radius: 0.7rem;
+  margin: 0 2rem 2rem 2rem; }
+  .country__image {
+    width: 25rem;
+    height: 17rem;
+    object-fit: cover;
+    /*width: 30rem;
+  height: 17rem;*/ }
+  .country__info {
+    padding: 2.5rem 2.5rem 3rem 2.5rem; }
+  .country__name {
+    font-size: 2.5rem;
+    margin-bottom: 0.3rem; }
+  .country__region {
+    font-size: 1.3rem;
+    margin-bottom: 2.5rem;
+    text-transform: uppercase;
+    color: #888; }
+  .country__row {
+    font-size: 1rem; }
+  .country__row:not(:last-child) {
+    margin-bottom: 1rem; }
+  .country__row span {
+    display: inline-block;
+    margin-right: 1.5rem;
+    font-size: 1.5rem; }
+
+.footer {
+  bottom: 0;
+  width: 100%;
+  height: 3rem;
+  background: #2c3e50;
+  display: flex;
+  justify-content: center;
+  align-items: center; }
+  .footer__name {
+    color: #ecf0f1;
+    font-size: 1rem; }
+
+.header {
+  width: 100%;
+  display: flex;
+  position: fixed;
+  top: 0;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem;
+  height: 6.5rem;
+  background: #2c3e50; }
+  .header__logo {
+    color: #27ae60;
+    text-shadow: 2px 2px #bdc3c7;
+    font-size: 3rem;
+    text-decoration: none; }
+
+.navigation__ul {
+  display: flex;
+  list-style-type: none;
+  align-items: center; }
+
+.navigation__li {
+  border-bottom: 2px solid transparent;
+  transition: .2s all; }
+  .navigation__li:not(:last-of-type) {
+    margin-right: 1rem; }
+  .navigation__li:hover {
+    border-bottom: 2px solid #ecf0f1; }
+  .navigation__li--sign {
+    background: #2ecc71;
+    padding: 0.5rem;
+    border-radius: 8px;
+    border: none; }
+
+.navigation__link {
+  color: #ecf0f1;
+  text-decoration: none;
+  font-size: 1.5rem; }
