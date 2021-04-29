@@ -23,14 +23,15 @@ html {
 .countries {
   display: flex;
   flex-wrap: wrap;
-  justify-content: center; }
+  justify-content: center;
+  opacity: 0;
+  transition: .2s all; }
 
 .country {
   width: 25rem;
   background-color: #fff;
   box-shadow: 0 2rem 5rem 1rem rgba(0, 0, 0, 0.1);
-  border-radius: 0.7rem;
-  margin: 0 2rem 2rem 2rem; }
+  border-radius: 0.7rem; }
   .country__image {
     width: 25rem;
     height: 17rem;
@@ -56,6 +57,21 @@ html {
     margin-right: 1.5rem;
     font-size: 1.5rem; }
 
+.neighbour::before {
+  content: 'Neighbor country';
+  width: 100%;
+  position: absolute;
+  top: -3rem;
+  text-align: center;
+  font-size: 1.7rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  color: #888; }
+
+.neighbour {
+  transform: scale(0.8) translateY(1rem);
+  margin-left: 0; }
+
 .footer {
   bottom: 0;
   width: 100%;
@@ -71,6 +87,7 @@ html {
 .header {
   width: 100%;
   display: flex;
+  z-index: 99999;
   position: fixed;
   top: 0;
   justify-content: space-between;
