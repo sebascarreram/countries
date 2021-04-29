@@ -2,6 +2,8 @@
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
+  opacity: 0;
+  transition: .2s all;
 }
 
 .country {
@@ -9,7 +11,7 @@
   background-color: #fff;
   box-shadow: 0 2rem 5rem 1rem rgba(0, 0, 0, 0.1);
   border-radius: 0.7rem;
-  margin: 0 2rem 2rem 2rem;
+  //margin: 0 2rem 2rem 2rem;
 
   &__image {
 //    width: 100%;
@@ -51,3 +53,22 @@ object-fit: cover;
     font-size: 1.5rem;
   }
 }
+
+.neighbour::before {
+  content: 'Neighbor country';
+  width: 100%;
+  position: absolute;
+  top: -3rem;
+
+  text-align: center;
+  font-size: 1.7rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  color: #888;
+}
+
+.neighbour {
+  transform: scale(0.8) translateY(1rem);
+  margin-left: 0;
+}
+
