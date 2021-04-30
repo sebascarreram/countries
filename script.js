@@ -61,7 +61,6 @@ const renderCountry = function (data, className = "") {
   } else {
     str.push(languages[0].name);
   }
-
   const markup = `
     <article class="country ${className}">
       <img
@@ -82,6 +81,11 @@ const renderCountry = function (data, className = "") {
   `;
 
   container.insertAdjacentHTML("beforeend", markup);
+  container.style.opacity = 1;
+};
+
+const renderError = function (message) {
+  container.insertAdjacentHTML("beforeend", message);
   container.style.opacity = 1;
 };
 
@@ -157,7 +161,6 @@ const getCountryData = function (country) {
     .then((res) => res.json())
     .then((data) => {
       renderCountry(data[0]);
-
       const neighbor = data[0].borders;
 
       // GET neighbor country
@@ -177,6 +180,10 @@ const getCountryData = function (country) {
       getNeighbor.forEach((country) => {
         renderCountry(country, "neighbour");
       });
+    })
+    .catch((err) => {
+      console.error(`${err} 🐞🐞`);
+      renderError(`Something went wrong 🔥🔥 ${err.message}`);
     });
 };
 
