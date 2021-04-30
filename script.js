@@ -85,6 +85,7 @@ const renderCountry = function (data, className = "") {
   container.style.opacity = 1;
 };
 
+/*
 /////////////
 // ONLY COUNTRY WITH NEIGHBOR
 /////////////
@@ -139,3 +140,22 @@ const getCountryAndNeighbor = function (country) {
 //getCountryAndNeighbor("Colombia");
 getCountryAndNeighbor("usa");
 //getCountryAndNeighbor("new zealand");
+//
+//
+*/
+
+//const request = new XMLHttpRequest();
+//request.open("GET", `https://restcountries.eu/rest/v2/name/${country}`);
+//request.send();
+//
+//
+///////////
+// Promise and Fetch API
+///////////
+const getCountryData = function (country) {
+  fetch(`https://restcountries.eu/rest/v2/name/${country}`)
+    .then((res) => res.json())
+    .then((data) => renderCountry(data[0]));
+};
+
+getCountryData("usa");
