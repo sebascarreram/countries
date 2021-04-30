@@ -155,7 +155,29 @@ getCountryAndNeighbor("usa");
 const getCountryData = function (country) {
   fetch(`https://restcountries.eu/rest/v2/name/${country}`)
     .then((res) => res.json())
-    .then((data) => renderCountry(data[0]));
+    .then((data) => {
+      renderCountry(data[0]);
+
+      const neighbor = data[0].borders;
+
+      // GET neighbor country
+
+      // it called Destructuring assignment
+      // [ "Hello", "how" ] => "Hello;how"
+      const neighborJoin = neighbor.join(";");
+
+      if (!neighbor.length) return;
+
+      return fetch(
+        `https://restcountries.eu/rest/v2/alpha?codes=${neighborJoin}`
+      );
+    })
+    .then((res) => res.json())
+    .then((getNeighbor) => {
+      getNeighbor.forEach((country) => {
+        renderCountry(country, "neighbour");
+      });
+    });
 };
 
 getCountryData("usa");
