@@ -85,7 +85,10 @@ const renderCountry = function (data, className = "") {
 };
 
 const renderError = function (message) {
-  container.insertAdjacentHTML("beforeend", message);
+  const markup = `
+  <p class="error">${message}</p>
+  `
+  container.insertAdjacentHTML("beforeend", markup);
   container.style.opacity = 1;
 };
 
