@@ -17,4 +17,15 @@
     font-size: 3rem;
     text-decoration: none;
   }
+
+  &__left{
+    display: flex;
+  }
+
+  &__logoSub{
+    font-size: 1rem;
+    color: #ecf0f1;
+    align-self: flex-end;
+    margin: 0 0 0.3rem 0.5rem;
+  }
 }
