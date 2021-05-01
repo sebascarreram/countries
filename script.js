@@ -161,24 +161,36 @@ getCountryAndNeighbor("usa");
 ///////////
 const getCountryData = function (country) {
   fetch(`https://restcountries.eu/rest/v2/name/${country}`)
-    .then((res) => res.json())
+    .then((res) => {
+      //console.log(res);
+      if (!res.ok) throw new Error(`Country not found (${res.status})`);
+      return res.json();
+    })
     .then((data) => {
       renderCountry(data[0]);
-      const neighbor = data[0].borders;
+      // const neighbor = data[0].borders;
+
+      const neighbor = "asdasd";
+      //const neighbor = data[0].borders[0];
 
       // GET neighbor country
 
       // it called Destructuring assignment
       // [ "Hello", "how" ] => "Hello;how"
-      const neighborJoin = neighbor.join(";");
+      //const neighborJoin = neighbor.join(";");
 
       if (!neighbor.length) return;
 
-      return fetch(
-        `https://restcountries.eu/rest/v2/alpha?codes=${neighborJoin}`
-      );
+      return fetch(`https://restcountries.eu/rest/v2/alpha?codes=${neighbor}`);
     })
-    .then((res) => res.json())
+    .then((res) => {
+      console.log(res);
+      if (!res.ok){
+        container.style.flexDirection = "column";
+        throw new Error(`Neighbor country not found (${res.status})`)
+      };
+      return res.json();
+    })
     .then((getNeighbor) => {
       getNeighbor.forEach((country) => {
         renderCountry(country, "neighbour");
@@ -186,8 +198,8 @@ const getCountryData = function (country) {
     })
     .catch((err) => {
       console.error(`${err} 🐞🐞`);
-      renderError(`Something went wrong 🔥🔥 ${err.message}`);
+      renderError(`Something went wrong 🔥🔥 ${err.message}. Try again !`);
     });
 };
 
-getCountryData("usa");
+getCountryData("colombia");
