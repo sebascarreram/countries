@@ -87,7 +87,7 @@ const renderCountry = function (data, className = "") {
 const renderError = function (message) {
   const markup = `
   <p class="error">${message}</p>
-  `
+  `;
   container.insertAdjacentHTML("beforeend", markup);
   container.style.opacity = 1;
 };
@@ -159,6 +159,17 @@ getCountryAndNeighbor("usa");
 ///////////
 // Promise and Fetch API
 ///////////
+const getJSON = function (url, errorMSG = "Something went wrong 🔥🔥") {
+  return fetch(url).then((res) => {
+    container.style.flexDirection = "column";
+    if (!res.ok) throw new Error(errorMSG);
+    return res.json();
+  });
+};
+
+/*
+// Reference
+//
 const getCountryData = function (country) {
   fetch(`https://restcountries.eu/rest/v2/name/${country}`)
     .then((res) => {
@@ -168,27 +179,26 @@ const getCountryData = function (country) {
     })
     .then((data) => {
       renderCountry(data[0]);
-      // const neighbor = data[0].borders;
-
-      const neighbor = "asdasd";
+      const neighbor = data[0].borders;
+      //const neighbor = "asdasd";
       //const neighbor = data[0].borders[0];
 
       // GET neighbor country
 
       // it called Destructuring assignment
       // [ "Hello", "how" ] => "Hello;how"
-      //const neighborJoin = neighbor.join(";");
+      const neighborJoin = neighbor.join(";");
 
       if (!neighbor.length) return;
 
-      return fetch(`https://restcountries.eu/rest/v2/alpha?codes=${neighbor}`);
+      return fetch(`https://restcountries.eu/rest/v2/alpha?codes=${neighborJoin}`);
     })
     .then((res) => {
       console.log(res);
-      if (!res.ok){
+      if (!res.ok) {
         container.style.flexDirection = "column";
-        throw new Error(`Neighbor country not found (${res.status})`)
-      };
+        throw new Error(`Neighbor country not found (${res.status})`);
+      }
       return res.json();
     })
     .then((getNeighbor) => {
@@ -201,5 +211,42 @@ const getCountryData = function (country) {
       renderError(`Something went wrong 🔥🔥 ${err.message}. Try again !`);
     });
 };
+*/
 
-getCountryData("colombia");
+const getCountryData = function (country) {
+  getJSON(
+    `https://restcountries.eu/rest/v2/name/${country}`,
+    "country not found"
+  )
+    .then((data) => {
+      renderCountry(data[0]);
+      const neighbor = data[0].borders;
+      //const neighborJoin = "asdasd";
+      //const neighbor = data[0].borders[0];
+
+      // GET neighbor country
+
+      // it called Destructuring assignment
+      // [ "Hello", "how" ] => "Hello;how"
+      const neighborJoin = neighbor.join(";");
+
+      if (!neighbor.length) throw new Error("No neighbor");
+
+      return getJSON(
+        `https://restcountries.eu/rest/v2/alpha?codes=${neighborJoin}`,
+        "Neighbor country not found"
+      );
+    })
+    .then((getNeighbor) => {
+      getNeighbor.forEach((country) => {
+        renderCountry(country, "neighbour");
+      });
+    })
+    .catch((err) => {
+      console.error(`${err} 🐞🐞`);
+      renderError(`Something went wrong 🔥🔥 ${err.message}. Try again !`);
+    });
+};
+//getCountryData("australia");
+//getCountryData("china");
+getCountryData("canada");
